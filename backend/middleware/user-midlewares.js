@@ -42,21 +42,6 @@ function isUser(req,res,next){
     }
  }
 
- 
-function isAdmin(req,res,next){
-     const token = req.headers['authorization']
-    try{
-         const decoded = jwt.verify(token,process.env.SECRET_KEY);
-         req.user = decoded
-         console.log(decoded)
-         if(decoded.role!="admin") return res.status(200).json('Unauthorize admin')
-         next()
-    }catch(e){
-     res.status(400).json('Token not valid-')
-    }
- }
-
-
  function isOperator(req,res,next){
      const token = req.headers['authorization']
     try{
@@ -75,7 +60,5 @@ function isAdmin(req,res,next){
 module.exports = {"verifyjwt":verifyjwt,
 "isUser":isUser,
 "isLoggedIn":isLoggedIn,
-"isAdmin":isAdmin,
 "isOperator":isOperator
-
 }

@@ -1,12 +1,7 @@
 const express= require("express") ;
 const User = require("../model/userSchema");
-const Contact = require("../model/contactModel");
-const Employee = require("../model/employeeModel");
-
-
 const router = express.Router();
 require("dotenv").config();
-const nodemailer = require('nodemailer');
 const SECRET_KEY=process.env.SECRET_KEY
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
