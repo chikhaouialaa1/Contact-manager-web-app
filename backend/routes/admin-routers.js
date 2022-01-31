@@ -39,6 +39,17 @@ router.post("/login/admin", async (req, res) => {
       console.log(err);
     }
   });
+//getallusers
+router.get("/users",async (req, res) => {
+    try {
+        const user = await User.find({}) 
+        res.status(200).send(user);
+      }
+     catch (err) {
+	   res.status(400).send("All input is required");
+      console.log(err);
+    }
+  });
 
 
 //getallusers
@@ -65,7 +76,7 @@ router.post("/users",async (req, res) => {
 
   //getbyid
 //  router.get("/user-id/:id",admin_middleware.isAdmin, async (req,res)=> {
-router.get("/user-id/:id",admin_middleware.isAdmin, async (req,res)=> {
+router.get("/user-id/:id", async (req,res)=> {
     var userId = req.params.id.toString();
     try{
         //res.send(userId).status(200)
