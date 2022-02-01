@@ -5,7 +5,7 @@ import Form from './Component/Form';
 import Table from './Component/Table';
 import Cart from './Component/Cart';
 import Login from './Component/Login';
-import Singup from './Component/Singup';
+import Singup from './Component/signup/Singup';
 
 
 class App extends Component {
