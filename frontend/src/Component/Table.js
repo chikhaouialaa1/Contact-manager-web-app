@@ -17,14 +17,11 @@ class Table extends Component {
             data: [],
             success_flag: 0,
             login: true,
-            username:'',
-            email:'',
-            role:'',
-            address:'',
-            userid:'',
             updateuser:false,
+            roleid:0,
             user:{}
         };
+
     }
 
     
@@ -147,25 +144,51 @@ class Table extends Component {
             </div>
         }
 
-        const list_data = this.state.data.map((item, index)=> {
-            return <tr>
-                <td>{index+1}</td>
-                <td>{item.name}</td>
-                <td>{item.email}</td>
-                <td>{item.role}</td>
-                <td>{item.address}</td>
-                <td><button className='btn btn-danger' onClick={() => this.delete(item._id)}>Delete</button></td>
-                <td><button className='btn btn-primary' onClick={() => this.getuser(item._id)}>View</button></td>
-                <td><button className='btn btn-info' onClick={() => this.updateuser(item)}>update</button></td>
-            </tr>
+        const list_data = this.state.data.map((item, index)=> { 
+            console.log(item)
+            this.setState.roleid=0
+            let refid=0
+            if(item.role==="client") refid=1
+            if (item.role==="employee") refid=2
+            if (item.role==="supplies") refid=3
+            if((refid===this.state.roleid))
+            {    return <tr>
+                    <td>{index+1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.role}</td>
+                    <td>{item.address}</td>
+                    <td><button className='btn btn-danger' onClick={() => this.delete(item._id)}>Delete</button></td>
+                    <td><button className='btn btn-primary' onClick={() => this.getuser(item._id)}>View</button></td>
+                    <td><button className='btn btn-info' onClick={() => this.updateuser(item)}>update</button></td>
+                </tr>
+            }
+            
         })
+            
 
         return (
             <section id="admin">
             <Sidebar />
             <div class="content">
               <Navbar />
-                <div className="col-md-12">
+              <select 
+                    className="form-select"
+                    onChange={(e)=>{
+                        console.log(e.target.selectedIndex)
+                        this.setState({
+                            roleid: e.target.selectedIndex
+                        });
+                        }
+                    }
+                    defaultValue={"client"}
+                    name="user" id="user">
+                        <option value="client">all</option>
+                        <option value="client">client</option>
+                        <option value="employee">employee</option>
+                        <option value="supplies">supplies</option>
+             </select>
+               <div className="col-md-12">
                     {success_flag}
                     <div className="widget p-lg">
                     <h4 className="m-b-lg">List</h4>

@@ -21,23 +21,7 @@ const StepOne = ({ nextStep, handleFormData, values }) => {
       nextStep();
     }
   };
-  /*
-    const [formData, setFormData] = useState({
-        //all users : client,empl , fornisseur
-        name : "",
-        email : "",
-        role : "",
-        password  : ""
-        address : ""
-        tel :""
-        //empl
-        salary:""
-        post : ""
-        //fornisseur
-        suppliers
-      })
-  */
-  return (
+return (
     <div>
       <Card style={{ marginTop: 100 }}>
         <Card.Body>
