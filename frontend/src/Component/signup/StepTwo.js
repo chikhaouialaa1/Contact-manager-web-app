@@ -1,29 +1,14 @@
 import React, { useState } from "react";
 import { Form, Card, Button } from "react-bootstrap";
-import validator from "validator";
 import axios from 'axios';
-import Cookies from 'universal-cookie';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
   
 // creating functional component ans getting props from app.js and destucturing them
-const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
+  const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
    //creating error state for validation
   const [error, setError] = useState(false);
-/*
-    // after form submit validating the form data using validator
-  const submitFormData = (e) => {
-    e.preventDefault();
+  const [created, setcreated] = useState(false);
 
-     // checking if value of first name and last name is empty show error else take to next step
-    if (validator.isEmpty(values.age) || validator.isEmpty(values.email)) {
-      setError(true);
-    } else {
-      nextStep();
-    }
-  }
-    */
 
   function removeEmpty(obj) {
     return Object.entries(obj)
@@ -32,10 +17,13 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
   }
   function post(values){    
     let newClient=removeEmpty(values)
+    console.log("new client",newClient)
     axios.post('http://localhost:4000/client/signup', newClient)
-    .then(function(response){
+    .then((response)=>{
+      //createdVar=true
+      setcreated(true)
       console.log(response)
-      return <Redirect to='/' />
+      //console.log("herrreeeeeeeeeeeeeeeeeeeee")
 
     }).catch(function(err){
         console.log(err);
@@ -97,7 +85,12 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
                 ""
               )}
             </Form.Group>
-            
+            {
+              created &&
+              <div class="alert alert-info" role="alert">
+                      account created successfully
+              </div>
+            }
             <div style={{ display: "flex", justifyContent: "space-around" }}>
               <Button variant="primary" onClick={prevStep}>
                 Previous
@@ -115,9 +108,6 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
             </div>
           </Form>
         </Card.Body>
-        <button to="/login" >back to login page</button>
-        <li className="nav-item"><Link to="/cart" className="nav-link"><i className="fa fa-table" />cart</Link></li>
-
       </Card>
     </>
   );

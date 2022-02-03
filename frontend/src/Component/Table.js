@@ -159,7 +159,6 @@ class Table extends Component {
                     <td>{item.role}</td>
                     <td>{item.address}</td>
                     <td><button className='btn btn-danger' onClick={() => this.delete(item._id)}>Delete</button></td>
-                    <td><button className='btn btn-primary' onClick={() => this.getuser(item._id)}>View</button></td>
                     <td><button className='btn btn-info' onClick={() => this.updateuser(item)}>update</button></td>
                 </tr>
             }
@@ -229,7 +228,6 @@ class Table extends Component {
                                     <th>role</th>
                                     <th>address</th>
                                     <th>Delete user</th>
-                                    <th>view user</th>
                                     <th>update user</th>
                                 </tr>
                                 {list_data}

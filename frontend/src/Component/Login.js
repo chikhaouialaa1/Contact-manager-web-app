@@ -10,7 +10,8 @@ class Login extends Component {
     super();
 
     this.state ={
-        login: false
+        login: false,
+        badpassword : false
     };
   }
 
@@ -26,7 +27,7 @@ class Login extends Component {
 
   post(refs){
     var self = this;
-    axios.post('http://localhost:4000/user/login', {
+    axios.post('http://localhost:4000/login/admin', {
         email: refs.username.value,
         password: refs.password.value
     }).then(function(response){
@@ -39,6 +40,10 @@ class Login extends Component {
         })
       }
     }).catch(function(err){
+      self.setState({
+        badpassword: true
+      })
+
         console.log(err);
     });
   }
@@ -67,9 +72,17 @@ class Login extends Component {
                     <label htmlFor="exampleInputPassword1" className="input__label">Password</label>
                     <input type="password" className="form-control login_text_field_bg input-style" id="exampleInputPassword1" ref="password" placeholder required />
                   </div>
+                  {
+                  this.state.badpassword &&
+                  <div class="alert alert-danger" role="alert">
+                      Invalid email or password
+                  </div>                  
+                  }
                   <div className="d-flex align-items-center flex-wrap justify-content-between">
                     <input type="button" onClick={() => this.post(this.refs)} value="Login now" className="btn btn-primary btn-style mt-4" />
                   </div>
+                  <>
+                  </>
                 </form>
               </div>
             </div>

@@ -8,38 +8,12 @@ import Cookies from 'universal-cookie';
 
 const Final = ({ values,handleFormData,prevStep }) => {
 const [error, setError] = useState(false);
+const [created, setcreated] = useState(false);
+
 const submitFormData = (e) => {
     e.preventDefault();
 
-     // checking if value of first name and last name is empty show error else take to next step
-    
-    /*
-     if (validator.isEmpty(values.email) || validator.isEmpty(values.email)) {
-      setError(true);
-    } else {
-      nextStep();
-    }
-    */
   };
-/*
-  function post(values){    
-    axios.post('http://localhost:4000/user/login', {
-        email: refs.username.value,
-        password: refs.password.value
-    }).then(function(response){
-      console.log(response);
-      if (response.status===200 && response.data != undefined){
-        cookies.set('jwtToken', response.data, { path: '/' });
-
-        self.setState({
-          login: true
-        })
-      }
-    }).catch(function(err){
-        console.log(err);
-    });
-  }
-*/
 
 function removeEmpty(obj) {
     return Object.entries(obj)
@@ -119,6 +93,13 @@ function removeEmpty(obj) {
                 ""
               )}
           </Form.Group>  
+          {
+                  created &&
+                  <div class="alert alert-info" role="alert">
+                      account created successfully
+                  </div>
+                }
+              <br></br>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <Button variant="primary" onClick={prevStep}>
                     Previous

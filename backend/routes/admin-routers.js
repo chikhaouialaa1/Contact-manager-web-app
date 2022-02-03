@@ -14,7 +14,7 @@ router.use(express.json())
 const admin_middleware = require("../middleware/admin-middleware")
 
 //admin_signin_API
-router.post("/login/admin", async (req, res) => {
+router.post("/login/admin",async (req, res) => {
     try {
       const { email, password } = req.body;
   

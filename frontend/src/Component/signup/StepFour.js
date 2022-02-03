@@ -8,6 +8,10 @@ import Cookies from 'universal-cookie';
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepFour = ({ nextStep,prevStep,handleFormData, values }) => {
+
+  // let createdVar = false
+  const [created, setcreated] = useState(false);
+
   //creating error state for validation
   const [error, setError] = useState(false);
   const cookies = new Cookies();
@@ -26,38 +30,13 @@ const StepFour = ({ nextStep,prevStep,handleFormData, values }) => {
       let newClient=removeEmpty(values)
       axios.post('http://localhost:4000/client/signup', newClient)
       .then(function(response){
+        //createdVar=true
+        setcreated(true)
         console.log(response)
       }).catch(function(err){
           console.log(err);
       });
     }
-/*
-    function post(values){    
-      newClient=removeEmpty(values)
-      axios.post('http://localhost:4000/client/signup', newClient)
-      .then(function(response){
-        console.log(response)
-      }).catch(function(err){
-          console.log(err);
-      });
-    }
-  */
-  /*
-  // after form submit validating the form data using validator
-  const submitFormData = (e) => {
-    e.preventDefault();
-
-    // checking if value of first name and last name is empty show error else take to step 2
-    if (
-      validator.isEmpty(values.firstName) ||
-      validator.isEmpty(values.lastName)
-    ) {
-      setError(true);
-    } else {
-      nextStep();
-    }
-  };
-  */
 
   return (
     <div>
@@ -84,7 +63,15 @@ const StepFour = ({ nextStep,prevStep,handleFormData, values }) => {
               ) : (
                 ""
               )}
+             
             </Form.Group>
+            {
+                  created &&
+                  <div class="alert alert-info" role="alert">
+                      account created successfully
+                  </div>
+                }
+              <br></br>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
               <Button variant="primary" onClick={prevStep}>
                 Previous
