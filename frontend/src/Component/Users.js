@@ -23,8 +23,8 @@ class Users extends Component {
             roleid:0,
             user:{}
         };
-
     }
+
     authLogin(){
         let jwtToken = cookies.get('jwtToken');
         
@@ -99,35 +99,6 @@ class Users extends Component {
         });
     }
 
-
-
-    addCart(id){
-        let cookieCartList = cookies.get('cart_list');
-        
-        if (cookieCartList === undefined){
-            cookies.set('cart_list', [id], { path: '/' });
-        } else {
-            let exist = false;
-            for (var i=0; i<cookieCartList.length; i++){
-                if (cookieCartList[i] === id){
-                    exist = true;
-                    break;
-                }
-            }
-
-            if (!exist){
-                cookieCartList.push(id);
-                cookies.set('cart_list', cookieCartList, { path: '/' });
-            }
-        }
-
-        cookieCartList = cookies.get('cart_list');
-
-        this.setState({
-            success_flag: 1
-        });
-    }
-
     render() {
         if (this.state.login === false) {
             return <Redirect to='/login' />
@@ -167,22 +138,6 @@ class Users extends Component {
             <Sidebar />
             <div class="content">
               <Navbar />
-              <select 
-                    className="form-select"
-                    onChange={(e)=>{
-                        console.log(e.target.selectedIndex)
-                        this.setState({
-                            roleid: e.target.selectedIndex
-                        });
-                        }
-                    }
-                    defaultValue={"client"}
-                    name="user" id="user">
-                        <option value="client">all</option>
-                        <option value="client">client</option>
-                        <option value="employee">employee</option>
-                        <option value="supplies">supplies</option>
-             </select>
                <div className="col-md-12">
                     {success_flag}
                     <div className="widget p-lg">
@@ -226,7 +181,7 @@ class Users extends Component {
                                     <th>Delete user</th>
                                     <th>update user</th>
                                 </tr>
-                                {list_data}
+                                    {list_data}
                             </tbody>
                         </table>
                     </div>

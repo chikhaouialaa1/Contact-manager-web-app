@@ -31,24 +31,6 @@ function removeEmpty(obj) {
     });
   }
 
-  
-/*
-    const [formData, setFormData] = useState({
-        //all users : client,empl , fornisseur
-        name : "",
-        email : "",
-        role : "",
-        password  : ""
-        address : ""
-        tel :""
-        //empl
-        salary:""
-        post : ""
-        //fornisseur
-        suppliers
-      })
-  */
-
     //destructuring the object from values
   const { firstName, lastName, age, email } = values;
   

@@ -12,16 +12,7 @@ import StepFour from "./StepFour";
 function Signup() {
   //state for steps
   const [step, setstep] = useState(1);
-/*
-  //state for form data
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    age: "",
-    email: "",
-    
-  })
-  */
+
     const [formData, setFormData] = useState({
         //all users : client,empl , fornisseur
         name : "",
@@ -37,7 +28,6 @@ function Signup() {
         suppliers : "" 
       })
   
-
   // function for going to next step by increasing step state by 1
   const nextStep = () => {
     if(formData.role==="client"){
@@ -89,7 +79,7 @@ function Signup() {
           <Container>
             <Row>
               <Col  md={{ span: 6, offset: 3 }} className="custom-margin">
-                <StepOne {...showdata(formData)} nextStep={nextStep} handleFormData={handleInputData} values={formData} />
+                <StepOne nextStep={nextStep} handleFormData={handleInputData} values={formData} />
               </Col>
             </Row>
           </Container>

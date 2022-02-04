@@ -13,6 +13,7 @@ const SECRET_KEY=process.env.SECRET_KEY
 router.use(express.json())
 const admin_middleware = require("../middleware/admin-middleware")
 
+
 //admin_signin_API
 router.post("/login/admin",async (req, res) => {
     try {
@@ -39,8 +40,14 @@ router.post("/login/admin",async (req, res) => {
       console.log(err);
     }
   });
+
+  router.post("/login/test",async (req, res) => {
+    const { email, password } = req.body;
+    res.send(email)
+  })
+
 //getallusers
-router.get("/users",async (req, res) => {
+  router.get("/users",admin_middleware.isAdmin,async (req, res) => {
     try {
         const user = await User.find({}) 
         res.status(200).send(user);

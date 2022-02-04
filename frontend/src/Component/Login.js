@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import lo from 'universal-cookie';
+
 import Footer from "./Footer"
 import Header from "./Header"
 
@@ -34,10 +36,9 @@ class Login extends Component {
         email: refs.username.value,
         password: refs.password.value
     }).then(function(response){
-      console.log(response);
+      console.log(response)
       if (response.status===200 && response.data != undefined){
         cookies.set('jwtToken', response.data, { path: '/' });
-
         self.setState({
           login: true
         })
