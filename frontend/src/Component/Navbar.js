@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import  { Redirect } from 'react-router-dom'
 import Cookies from 'universal-cookie';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+
 
 const cookies = new Cookies();
 
@@ -54,7 +57,7 @@ class Navbar extends Component {
                     <button id="on" className="btn btn-info"><i className="fa fa-bars" /></button>
                     <button id="off" className="btn btn-info hide"><i className="fa fa-align-left" /></button>
                     <button className="btn btn-info hidden-xs-down"><i className="fa fa-expand-arrows-alt" /></button>
-                    <button className="btn btn-info hidden-xs-down"><i className="fa fa-home" />Back Home</button>
+                    <button className="btn btn-info hidden-xs-down"><Link to="/home" className="nav-link"><i className="fa fa-home" />Back Home</Link></button>
                     </div>
                     <div className="right">
                     <button className="btn btn-info hidden-xs-down"><i className="fa fa-bell" /></button>

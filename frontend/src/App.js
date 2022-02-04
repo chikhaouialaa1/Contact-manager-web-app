@@ -7,6 +7,8 @@ import Cart from './Component/Cart';
 import Login from './Component/Login';
 import Singup from './Component/signup/Singup';
 import Home from './Component/Home'
+import Users from './Component/Users'
+
 
 
 class App extends Component {
@@ -19,6 +21,7 @@ class App extends Component {
           <Route path="/cart" component={Cart} />
           <Route path="/singup" component={Singup} />
           <Route path="/home" component={Home} />
+          <Route path="/users" component={Users} />
         </div>
     );
   }

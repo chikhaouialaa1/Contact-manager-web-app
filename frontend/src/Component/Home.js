@@ -28,6 +28,7 @@ class Home extends Component {
     return (
         <section>
           <Header />
+          <h1 class="display-1">CONTACT MANAGER APP</h1>
           <section className="login-form py-md-5 py-3">
           <section className="py-5">
             <div className="container my-5">
