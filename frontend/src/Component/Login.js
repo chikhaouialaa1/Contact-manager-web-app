@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import Footer from "./Footer"
+import Header from "./Header"
+
 
 const cookies = new Cookies();
 
@@ -55,6 +58,7 @@ class Login extends Component {
 
     return (
         <section>
+          <Header />
         <div className>
           <section className="login-form py-md-5 py-3">
             <div className="card card_border p-md-4">
@@ -87,6 +91,7 @@ class Login extends Component {
               </div>
             </div>
           </section>
+          <Footer />
         </div>
       </section>
       );

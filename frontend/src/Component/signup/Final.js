@@ -5,6 +5,7 @@ import validator from "validator";
 import { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import Footer from '../Footer'
 
 const Final = ({ values,handleFormData,prevStep }) => {
 const [error, setError] = useState(false);
@@ -117,6 +118,7 @@ function removeEmpty(obj) {
 
         </Card.Body>
       </Card>
+      <Footer />
     </>
   );
 };

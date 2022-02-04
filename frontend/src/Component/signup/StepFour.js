@@ -5,6 +5,8 @@ import { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import Footer from '../Footer'
+
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepFour = ({ nextStep,prevStep,handleFormData, values }) => {
@@ -89,6 +91,7 @@ const StepFour = ({ nextStep,prevStep,handleFormData, values }) => {
           </Form>
         </Card.Body>
       </Card>
+      <Footer />
     </div>
   );
 };

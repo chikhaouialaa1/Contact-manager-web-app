@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import validator from "validator";
+import Footer from '../Footer'
+import Header from '../Header'
+
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepOne = ({ nextStep, handleFormData, values }) => {
@@ -22,7 +25,9 @@ const StepOne = ({ nextStep, handleFormData, values }) => {
     }
   };
 return (
+  <>
     <div>
+    <Header />
       <Card style={{ marginTop: 100 }}>
         <Card.Body>
         <h1>Register form</h1>
@@ -117,6 +122,8 @@ return (
         </Card.Body>
       </Card>
     </div>
+  <Footer />
+  </>
   );
 };
 

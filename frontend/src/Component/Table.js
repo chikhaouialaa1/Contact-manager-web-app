@@ -5,6 +5,8 @@ import Cookies from 'universal-cookie';
 
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
+import Footer from './Footer'
+
 
 const cookies = new Cookies();
 
@@ -167,6 +169,7 @@ class Table extends Component {
             
 
         return (
+            <>
             <section id="admin">
             <Sidebar />
             <div class="content">
@@ -237,6 +240,9 @@ class Table extends Component {
                 </div>
             </div>
           </section>
+           <Footer />      
+        </>
+
         );
     }
 }

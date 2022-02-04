@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import axios from 'axios';
+import Footer from '../Footer'
 
   
 // creating functional component ans getting props from app.js and destucturing them
@@ -108,6 +109,8 @@ import axios from 'axios';
             </div>
           </Form>
         </Card.Body>
+        <Footer />
+
       </Card>
     </>
   );
