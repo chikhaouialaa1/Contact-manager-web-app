@@ -2,22 +2,61 @@ import React, { Component } from 'react';
 import  { Redirect } from 'react-router-dom'
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-
+import {
+    PieChart,
+    Pie,
+    Tooltip,
+    BarChart,
+    XAxis,
+    YAxis,
+    Legend,
+    CartesianGrid,
+    Bar,
+  } from "recharts";
 const cookies = new Cookies();
 
 class Form extends Component {
 
     constructor(){
         super();
-
         this.state ={
             success_flag: 0,
             selectedFile: null,
-            login: true
+            login: true,
+            data: {},
+            clientlist:{},
+            supplieslist:{},
+            employeelist:{}
         };
+    }
+
+    
+    async get_data(){
+        console.log("aaaaaaaaaaaaaaaaaaaaaa")
+        await axios.post('http://localhost:4000/users')
+        .then((response) =>{
+            this.setState({
+                data: response.data
+            });
+        })
+        console.log(this.state.data)
+        this.setState({
+            clientlist : this.extractor(this.state.data,"client"),
+            employeelist : this.extractor(this.state.data,"employee"),
+            supplieslist : this.extractor(this.state.data,"supplies")
+        });
+    }
+
+    extractor(data,type){
+        let list=[]
+        for (let i=0;i<data.length;i++){
+            if(data[i].role===type)
+                list.push(data[i])
+        }
+        console.log(list)
+        return(list)
     }
 
     authLogin(){
@@ -32,104 +71,77 @@ class Form extends Component {
 
     componentWillMount(){
         this.authLogin();
+        this.get_data();
+        this.extractor(this.state.data)
     }
 
-    onFileChange = event => { 
-        this.setState({ selectedFile: event.target.files[0] });
-    };
-
-    post(refs){
-        var self = this;
-
-        const formData = new FormData(); 
-     
-        formData.append("filename", this.state.selectedFile);
-        formData.append('name', refs.name.value);
-        formData.append('price', refs.price.value);
-
-        console.log(formData);
-
-        axios.post('http://localhost:3001/insert', formData, {
-        }).then(function(response){
-            console.log(response.data);
-
-            document.getElementById("create-course-form").reset();
-
-            if (response.data.success){
-                self.setState({
-                    success_flag: 1
-                });
-            } else {
-                self.setState({
-                    success_flag: 2
-                });
-            }
-        }).catch(function(err){
-            console.log(err);
-
-            self.setState({
-              success_flag: 2
-            });
-        });
-    }
+    
+    
 
   render() {
+
+    
     if (this.state.login === false) {
         return <Redirect to='/login' />
     }
 
-    if (this.state.success_flag === 1){
-         var success_flag = <div className="form-group">
-            <br></br>
-            <div class="alert alert-success" role="alert">
-                <strong>Well done! </strong>
-                <span>You successfully read this important alert message.</span>
-                <a href="#" class="alert-link">alert link</a>
-            </div>
-        </div>
-    } else if (this.state.success_flag === 2) {
-        var success_flag = <div className="form-group">
-            <br></br>
-            <div class="alert alert-danger" role="alert">
-                <strong>Well done! </strong>
-                <span>You successfully read this important alert message.</span>
-                <a href="#" class="alert-link">alert link</a>
-            </div>
-        </div>
-    }
+
+    console.log(this.state.clientlist.length)
+    const data = [
+        { name: "client", users: this.state.clientlist.length },
+        { name: "employee", users: this.state.employeelist.length },
+        { name: "supplies", users: this.state.clientlist.length },
+      ];
 
     return (
+
         <section id="admin">
             <Sidebar />
             <div class="content">
                 <Navbar />
+                
                 <div className="col-lg-12">
-                    {success_flag}
-                    <form id="create-course-form" action="#" className="form-horizontal" style={{paddingTop: 25}}>
-                        <div className="form-group">
-                            <label htmlFor="control-demo-1" className="col-sm-3">Name</label>
-                            <div className="col-sm-12">
-                                <input type="text" id="control-demo-1" className="form-control" placeholder="Name" ref="name" />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="control-demo-2" className="col-sm-3">Price</label>
-                            <div className="col-sm-12">
-                                <input type="number" id="control-demo-2" className="form-control" placeholder="Price" ref="price" />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="control-demo-2" className="col-sm-3">Image</label>
-                            <div className="col-sm-12">
-                                <input type="file" accept="image/*" onChange={this.onFileChange} />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="col-sm-12">
-                                <input type="button" onClick={() => this.post(this.refs)} value="Submit" className="btn btn-primary" />
-                            </div>
-                        </div>
-                    </form>
+                <div style={{ textAlign: "center" }}>
+                    <h1>USERS STATISTICS</h1>
+                    <div className="App">
+                        <PieChart width={400} height={400}>
+                        <Pie
+                            dataKey="users"
+                            isAnimationActive={false}
+                            data={data}
+                            cx={200}
+                            cy={200}
+                            outerRadius={80}
+                            fill="#8884d8"
+                            label
+                        />
+                        <Tooltip />
+                        </PieChart>
+                        <BarChart
+                        width={500}
+                        height={300}
+                        data={data}
+                        margin={{
+                            top: 5,
+                            right: 30,
+                            left: 80,
+                            bottom: 5,
+                        }}
+                        barSize={20}
+                        >
+                        <XAxis
+                            dataKey="name"
+                            scale="point"
+                            padding={{ left: 10, right: 10 }}
+                        />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <Bar dataKey="users" fill="#8884d8" background={{ fill: "#eee" }} />
+                        </BarChart>
+                    </div>
+                    </div>
                 </div>
             </div>
         </section>

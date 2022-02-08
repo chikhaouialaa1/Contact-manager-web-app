@@ -3,12 +3,17 @@ import { Form, Card, Button } from "react-bootstrap";
 import validator from "validator";
 import Footer from '../Footer'
 import Header from '../Header'
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepOne = ({ nextStep, handleFormData, values }) => {
+
   //creating error state for validation
   const [error, setError] = useState(false);
+  
 
   // after form submit validating the form data using validator
   const submitFormData = (e) => {

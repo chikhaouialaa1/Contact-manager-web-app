@@ -47,7 +47,6 @@ class Table extends Component {
     };
 
     delete(id){
-        console.log("test")
         var self = this;
         axios.delete('http://localhost:4000/delete/user-id/'+id)
         .then(function(response){

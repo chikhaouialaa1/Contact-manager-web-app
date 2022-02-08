@@ -19,6 +19,7 @@ class App extends Component {
           <Route exact path="/" component={Table} />
           <Route path="/form" component={Form} />
           <Route path="/cart" component={Cart} />
+          <Route path="/admin/adduser" component={Singup} />
           <Route path="/singup" component={Singup} />
           <Route path="/home" component={Home} />
           <Route path="/users" component={Users} />
